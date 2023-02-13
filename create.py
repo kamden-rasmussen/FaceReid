@@ -11,3 +11,9 @@ def createTables():
                     (user_id INTEGER, friend_id INTEGER, following BOOL, FOREIGN KEY(user_id) REFERENCES users(id), FOREIGN KEY(friend_id) REFERENCES users(id))''')
     conn.commit()
     conn.close()
+    
+inject_user = [("John", "john@foobar.com", "1234"), 
+               ("Jane", "jane@foobar.com", "1234"), 
+               ("Jack", "jack@foobar.com", "1234"), 
+               ("Jill", "jill@foobar.com", "1234")
+              ]
