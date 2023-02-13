@@ -8,6 +8,6 @@ def createTables():
     c.execute('''CREATE TABLE IF NOT EXISTS posts
                  (id INTEGER PRIMARY KEY, body TEXT, user_id INTEGER, created_at DATETIME, FOREIGN KEY(user_id) REFERENCES users(id))''')
     c.execute('''CREATE TABLE IF NOT EXISTS friends
-                    (user_id INTEGER, friend_id INTEGER, FOREIGN KEY(user_id) REFERENCES users(id), FOREIGN KEY(friend_id) REFERENCES users(id))''')
+                    (user_id INTEGER, friend_id INTEGER, following BOOL, FOREIGN KEY(user_id) REFERENCES users(id), FOREIGN KEY(friend_id) REFERENCES users(id))''')
     conn.commit()
     conn.close()
