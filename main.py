@@ -1,7 +1,7 @@
 import create
 
 def main():
-    create.createTables()
+    create.main()
     return 0
 
 
