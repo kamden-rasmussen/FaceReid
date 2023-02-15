@@ -13,13 +13,28 @@ def main():
     # add friend service
     # add post service
 
-    userInput = input("What would you like to do? ")
+    userInput = ""
     while userInput != "exit":
         userInput = input("What would you like to do? ")
         if userInput == "get all users":
             users = userService.get_all_users()
             for user in users:
                 print(user)
+        if userInput == "get user by id":
+            user_id = input("What is the user id? ")
+            user = userService.get_user(user_id)
+            print(user)
+        if userInput == "get user by email":
+            email = input("What is the email? ")
+            user = userService.get_user_by_email(email)
+            print(user)
+        if userInput == "get user by name":
+            name = input("What is the name? ")
+            user = userService.get_user_by_name(name)
+            print(user)
+        
+        else:
+            print("Invalid input. Please try again. " + userInput)
 
 
     return 0
