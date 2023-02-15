@@ -62,14 +62,21 @@ def insertPosts():
     conn = sqlite3.connect('mydb.db')
     c = conn.cursor()
 
-    c.execute('''INSERT INTO posts (body, user_id) VALUES (?, ?)''', (post, user))
+    file = open('quotes.csv', 'r')
+
+    for line in file:
+        post = line
+        user = random.randint(1, 200)
+        c.execute('''INSERT INTO posts (body, user_id) VALUES (?, ?)''', (post, user))
+    
     conn.commit()
     conn.close()
 
 def main():
-    createTables()
-    insertUsers()
-    insertFriends()
+    # createTables()
+    # insertUsers()
+    # insertFriends()
+    insertPosts()
 
 
 
