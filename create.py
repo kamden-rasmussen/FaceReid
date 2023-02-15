@@ -29,6 +29,8 @@ def insertFriends():
     for i in range(100):
         user1 = random.randint(1, 200)
         user2 = random.randint(1, 200)
+        while user1 == user2:
+            user2 = random.randint(1, 200)
         c.execute('''INSERT INTO friends (user_id, friend_id, following) VALUES (?, ?, 1)''', (user1, user2))
         c.execute('''INSERT INTO friends (user_id, friend_id, following) VALUES (?, ?, 1)''', (user2, user1))
     conn.commit()
