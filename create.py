@@ -4,9 +4,7 @@ import random
 
 inject_users = injectUsers()
 
-def createTables():
-    conn = sqlite3.connect('mydb.db')
-    c = conn.cursor()
+def createTables(c):
     c.execute('''CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
@@ -31,22 +29,15 @@ def createTables():
 
     print("Tables created successfully")
 
-    conn.commit()
-    conn.close()
 
-def insertUsers():
-    conn = sqlite3.connect('mydb.db')
-    c = conn.cursor()
+def insertUsers(c):
     c.executemany('''INSERT INTO users (name, email, password) VALUES (?, ?, ?)''', inject_users)
 
     print( "Users inserted successfully")
+    return
 
-    conn.commit()
-    conn.close()
 
-def insertFriends():
-    conn = sqlite3.connect('mydb.db')
-    c = conn.cursor()
+def insertFriends(c):
     for i in range(100):
         user1 = random.randint(1, 200)
         user2 = random.randint(1, 200)
@@ -56,13 +47,9 @@ def insertFriends():
         c.execute('''INSERT INTO friends (user_id, friend_id, following) VALUES (?, ?, 1)''', (user2, user1))
 
     print("Friends inserted successfully")
+    return
 
-    conn.commit()
-    conn.close()
-
-def insertPosts():
-    conn = sqlite3.connect('mydb.db')
-    c = conn.cursor()
+def insertPosts(c):
 
     file = open('quotes.csv', 'r')
 
@@ -70,15 +57,27 @@ def insertPosts():
         post = line
         user = random.randint(1, 200)
         c.execute('''INSERT INTO posts (body, user_id) VALUES (?, ?)''', (post, user))
+        return
     
-    conn.commit()
-    conn.close()
 
-def main():
-    # createTables()
-    # insertUsers()
-    # insertFriends()
-    insertPosts()
+def commit(conn):
+    conn.commit()
+    # conn.close()
+
+def main(conn):
+    c = conn.cursor()
+    createTables(c)
+    commit(conn)
+
+    insertUsers(c)
+    commit(conn)
+
+    insertFriends(c)
+    commit(conn)
+
+    insertPosts(c)
+    commit(conn)
+
 
 
 
