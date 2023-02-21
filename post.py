@@ -5,12 +5,6 @@ class Post:
         self.body = body
         self.rating = rating
         self.dateCreated = dateCreated
-
-    # def printPost(self):
+      
     def __str__(self):
-        print("Post ID: " + str(self.id))
-        print("User ID: " + str(self.user_id))
-        print("Body: " + self.body)
-        print("Rating: " + str(self.rating))
-        print("Date Created: " + str(self.dateCreated))
-        print()
+      return f"Post ID: {self.id} \nUser ID: {self.user_id} \nBody: {self.body} \nRating: {self.rating} \nDate Created: {self.dateCreated}\n"

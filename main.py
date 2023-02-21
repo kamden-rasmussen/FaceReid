@@ -78,7 +78,7 @@ def main():
                     print("Posts from " + userService.get_user(friend)[1])
                     if posts is not None:
                         for post in posts:
-                            post.printPost()
+                            print(post)
 
             case "downvote post by id":
                 post_id = input("What is the post id? ")
@@ -94,7 +94,7 @@ def main():
 
 
 
-            # -------------------- Mangement --------------------
+            # -------------------- Management --------------------
             case "3":
                 friends = friendsService.INTERNAL_get_friends_for_user(3)
                 for friend in friends:
@@ -103,14 +103,14 @@ def main():
                     print("Posts from " + userService.get_user(friend)[1])
                     if posts is not None:
                         for post in posts:
-                            post.printPost()
+                            print(post)
             
             case "4":
                 friends = friendsService.INTERNAL_get_friends_of_friends(3)
                 for friend in friends:
                     posts = postsService.get_posts_for_user(friend)
                     for post in posts:
-                        post.printPost()
+                        print(post)
                     
                     
 
