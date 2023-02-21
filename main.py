@@ -80,6 +80,19 @@ def main():
                         for post in posts:
                             print(post)
 
+            case "downvote post by id":
+                post_id = input("What is the post id? ")
+                postsService.downvote_post(post_id)
+            
+            case "upvote post by id":
+                post_id = input("What is the post id? ")
+                postsService.upvote_post(post_id)
+
+            case "get posts friends of friends":
+                user_id = input("What is the user id? ")
+                friends = friendsService.get_friends_of_friends(user_id)
+
+
 
             # -------------------- Mangement --------------------
             case "3":
@@ -91,6 +104,14 @@ def main():
                     if posts is not None:
                         for post in posts:
                             print(post)
+            
+            case "4":
+                friends = friendsService.INTERNAL_get_friends_of_friends(3)
+                for friend in friends:
+                    posts = postsService.get_posts_for_user(friend)
+                    for post in posts:
+                        print(post)
+                    
                     
 
             case "exit":

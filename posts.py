@@ -26,13 +26,13 @@ class PostsService:
     
     def upvote_post(self, post_id):
         self.db.execute(
-            'UPDATE posts SET votes = votes + 1 WHERE id = ?', (post_id,)
+            'UPDATE posts SET rating = rating + 1 WHERE id = ?', (post_id,)
         )
         self.db.commit()
 
     def downvote_post(self, post_id):
         self.db.execute(
-            'UPDATE posts SET votes = votes - 1 WHERE id = ?', (post_id,)
+            'UPDATE posts SET rating = rating - 1 WHERE id = ?', (post_id,)
         )
         self.db.commit()
 
