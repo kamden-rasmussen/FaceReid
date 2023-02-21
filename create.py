@@ -14,7 +14,9 @@ def createTables(c):
 
     c.execute('''CREATE TABLE IF NOT EXISTS posts(
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        body TEXT, user_id INTEGER, 
+        user_id INTEGER, 
+        body TEXT,
+        rating INTEGER DEFAULT 0,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
         FOREIGN KEY(user_id) REFERENCES users(id)
         )''')
@@ -38,7 +40,7 @@ def insertUsers(c):
 
 
 def insertFriends(c):
-    for i in range(100):
+    for i in range(500):
         user1 = random.randint(1, 200)
         user2 = random.randint(1, 200)
         while user1 == user2:
@@ -51,14 +53,15 @@ def insertFriends(c):
 
 def insertPosts(c):
 
-    file = open('quotes.csv', 'r')
+    file = open('quotes.txt', 'r')
 
     for line in file:
-        post = line
+        post = line.strip()
         user = random.randint(1, 200)
-        c.execute('''INSERT INTO posts (body, user_id) VALUES (?, ?)''', (post, user))
-        return
-    
+        c.execute('''INSERT INTO posts (body, user_id, rating) VALUES (?, ?, ?)''', (post, user, 0))
+    file.close()
+
+    return
 
 def commit(conn):
     conn.commit()
