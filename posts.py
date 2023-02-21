@@ -4,15 +4,15 @@ class PostsService:
     def __init__(self, db):
         self.db = db
 
-    def get_all_posts(self):
+    def INTERNAL_get_all_posts(self): # TODO: fix this to use POST objects
         return self.db.execute('SELECT * FROM posts').fetchall()
 
-    def get_post(self, post_id):
+    def INTERNAL_get_post(self, post_id): # TODO: fix this to use POST objects
         return self.db.execute(
             'SELECT * FROM posts WHERE id = ?', (post_id,)
         ).fetchone()
 
-    def get_post_by_user_id(self, user_id):
+    def INTERNALget_post_by_user_id(self, user_id): # TODO: fix this to use POST objects
         return self.db.execute(
             'SELECT * FROM posts WHERE user_id = ?', (user_id,)
         ).fetchone()
