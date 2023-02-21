@@ -19,7 +19,7 @@ class PostsService:
 
     def add_post(self, body, user_id):
         self.db.execute(
-            'INSERT INTO posts (body, user_id) VALUES (?, ?)',
+            'INSERT INTO posts (user_id, body) VALUES (?, ?)',
             (body, user_id)
         )
         self.db.commit()
