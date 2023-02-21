@@ -78,7 +78,7 @@ def main():
                     print("Posts from " + userService.get_user(friend)[1])
                     if posts is not None:
                         for post in posts:
-                            post.printPost()
+                            print(post)
 
 
             # -------------------- Mangement --------------------
@@ -90,7 +90,7 @@ def main():
                     print("Posts from " + userService.get_user(friend)[1])
                     if posts is not None:
                         for post in posts:
-                            post.printPost()
+                            print(post)
                     
 
             case "exit":
