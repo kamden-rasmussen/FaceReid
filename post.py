@@ -6,7 +6,8 @@ class Post:
         self.rating = rating
         self.dateCreated = dateCreated
 
-    def printPost(self):
+    # def printPost(self):
+    def __str__(self):
         print("Post ID: " + str(self.id))
         print("User ID: " + str(self.user_id))
         print("Body: " + self.body)
