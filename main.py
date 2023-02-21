@@ -35,7 +35,7 @@ def main():
             case "get user by name":
                 name = input("What is the name? ")
                 user = userService.get_user_by_name(name)
-                print(user)\
+                print(user)
 
             # ------------------- FRIENDS -------------------
             case "get my friends by user id":
@@ -51,10 +51,16 @@ def main():
                 friends = friendsService.get_friends(user_id)
                 for friend in friends:
                     print(friend)
-            
+
+            case "add friend by user id":
+                user_id = input("What is the user id? ")
+                friend_id = input("What is the friend id? ")
+                friendsService.add_friend(user_id, friend_id)
+                friendsService.add_friend(friend_id, user_id)
+
             # -------------------- POSTS --------------------
             case "get all posts":
-                posts = postsService.get_all_posts()
+                posts = postsService.INTERNAL_get_all_posts()
                 for post in posts:
                     print(post)
 
@@ -79,6 +85,12 @@ def main():
                     if posts is not None:
                         for post in posts:
                             print(post)
+
+            case "add post":
+                user_id = input("What is the user id? ")
+                body = input("What is the body? ")
+                postsService.add_post(user_id, body)
+
 
             case "downvote post by id":
                 post_id = input("What is the post id? ")

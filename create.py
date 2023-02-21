@@ -24,7 +24,7 @@ def createTables(c):
     c.execute('''CREATE TABLE IF NOT EXISTS friends(
         user_id INTEGER, 
         friend_id INTEGER, 
-        following BOOL, 
+        following BOOL DEFAULT 1, 
         FOREIGN KEY(user_id) REFERENCES users(id), 
         FOREIGN KEY(friend_id) REFERENCES users(id)
         )''')
