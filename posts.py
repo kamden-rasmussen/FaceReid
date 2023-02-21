@@ -1,3 +1,5 @@
+from post import Post
+
 class PostsService:
     def __init__(self, db):
         self.db = db
@@ -21,5 +23,22 @@ class PostsService:
             (body, user_id)
         )
         self.db.commit()
+    
+    def upvote_post(self, post_id):
+        self.db.execute(
+            'UPDATE posts SET votes = votes + 1 WHERE id = ?', (post_id,)
+        )
+        self.db.commit()
 
-    # def upvote_post()
+    def downvote_post(self, post_id):
+        self.db.execute(
+            'UPDATE posts SET votes = votes - 1 WHERE id = ?', (post_id,)
+        )
+        self.db.commit()
+
+    def get_posts_for_user(self, user_id):
+        posts = []
+        for post in self.db.execute('SELECT * FROM posts WHERE user_id = ?', (user_id,)).fetchall():
+            tempPost = Post(post[0], post[1], post[2], post[3], post[4])
+            posts.append(tempPost)
+        return posts

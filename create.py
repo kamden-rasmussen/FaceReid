@@ -40,7 +40,7 @@ def insertUsers(c):
 
 
 def insertFriends(c):
-    for i in range(100):
+    for i in range(500):
         user1 = random.randint(1, 200)
         user2 = random.randint(1, 200)
         while user1 == user2:
