@@ -94,7 +94,7 @@ def main():
 
 
 
-            # -------------------- Mangement --------------------
+            # -------------------- Management --------------------
             case "3":
                 friends = friendsService.INTERNAL_get_friends_for_user(3)
                 for friend in friends:
