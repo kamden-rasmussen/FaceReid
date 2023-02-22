@@ -36,6 +36,11 @@ def main():
                 name = input("What is the name? ")
                 user = userService.get_user_by_name(name)
                 print(user)
+            case "create user":
+                name = input("What is the name? ")
+                password = input("What is the password? ")
+                user = userService.add_user(name, password)
+                print(user)
 
             # ------------------- FRIENDS -------------------
             case "get my friends by user id":
@@ -56,8 +61,10 @@ def main():
                 user_id = input("What is the user id? ")
                 friend_id = input("What is the friend id? ")
                 friendsService.add_friend(user_id, friend_id)
-                friendsService.add_friend(friend_id, user_id)
-
+                friends = friendsService.get_friends(user_id)
+                for friend in friends:
+                    print(friend)
+            
             # -------------------- POSTS --------------------
             case "get all posts":
                 posts = postsService.INTERNAL_get_all_posts()
@@ -86,12 +93,6 @@ def main():
                         for post in posts:
                             print(post)
 
-            case "add post":
-                user_id = input("What is the user id? ")
-                body = input("What is the body? ")
-                postsService.add_post(user_id, body)
-
-
             case "downvote post by id":
                 post_id = input("What is the post id? ")
                 postsService.downvote_post(post_id)
@@ -104,7 +105,10 @@ def main():
                 user_id = input("What is the user id? ")
                 friends = friendsService.get_friends_of_friends(user_id)
 
-
+            case "create post":
+                user_id = input("What is the user id? ")
+                content = input("What is the body? ")
+                post = postsService.add_post(user_id, content)
 
             # -------------------- Management --------------------
             case "3":

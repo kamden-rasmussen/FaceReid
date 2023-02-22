@@ -22,9 +22,10 @@ class UsersService:
             'SELECT * FROM users WHERE name = ?', (name,)
         ).fetchone()
 
-    def add_user(self, name, email, password):
+    def add_user(self, name, password):
         self.db.execute(
             'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-            (name, email, password)
+            (name, name + "@user.com", password)
         )
-        self.db.commit()    
+        self.db.commit()  
+        return self.get_user_by_name(name)  
