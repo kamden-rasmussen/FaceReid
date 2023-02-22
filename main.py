@@ -1,6 +1,8 @@
 import create
 import sqlite3
 import os
+import random
+from datetime import datetime
 from users import UsersService
 from posts import PostsService
 from friends import FriendsService
@@ -15,9 +17,11 @@ def main():
     postsService = PostsService(conn)
     friendsService = FriendsService(conn)
 
+    testUserId = -1
+
     userInput = ""
     while userInput != "exit":
-        userInput = input("What would you like to do? ")
+        userInput = input("\nWhat would you like to do? ")
         match userInput:
             # -------------------- USERS --------------------
             case "get all users":
@@ -111,15 +115,35 @@ def main():
                 post = postsService.add_post(user_id, content)
 
             # -------------------- Management --------------------
+            case "1":
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                # create a random user
+                userService.add_user("random" + current_time, "random" + current_time)
+                #get user
+                user = userService.get_user_by_name("random" + current_time)
+                print(user)
+                testUserId = user[0]
+
+            case "2":
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                # create a random post
+                postsService.add_post(testUserId, "random post" + current_time)
+                # get post
+                posts = postsService.get_posts_for_user(testUserId)
+                for post in posts:
+                    print(post)
+
             case "3":
-                friends = friendsService.INTERNAL_get_friends_for_user(3)
+                randomFriend = random.randint(1, 200)
+                # add a friendship
+                friendsService.add_friend(testUserId, randomFriend)
+                # get friends
+                friends = friendsService.get_friends(testUserId)
                 for friend in friends:
-                    print()
-                    posts = postsService.get_posts_for_user(friend)
-                    print("Posts from " + userService.get_user(friend)[1])
-                    if posts is not None:
-                        for post in posts:
-                            print(post)
+                    print(friend)
+                print()
             
             case "4":
                 friends = friendsService.INTERNAL_get_friends_of_friends(3)
@@ -127,8 +151,12 @@ def main():
                     posts = postsService.get_posts_for_user(friend)
                     for post in posts:
                         print(post)
-                    
-                    
+
+            case "5":
+                # unfollow all friends
+                friends = friendsService.unfollow_all_friends(testUserId)
+                for friend in friends:
+                    print(friend)
 
             case "exit":
                 print("Goodbye!")

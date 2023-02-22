@@ -12,11 +12,6 @@ class PostsService:
             'SELECT * FROM posts WHERE id = ?', (post_id,)
         ).fetchone()
 
-    def INTERNALget_post_by_user_id(self, user_id): # TODO: fix this to use POST objects
-        return self.db.execute(
-            'SELECT * FROM posts WHERE user_id = ?', (user_id,)
-        ).fetchone()
-
     def add_post(self, user_id, body):
         self.db.execute(
             'INSERT INTO posts (user_id, body) VALUES (?, ?)',

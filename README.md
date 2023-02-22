@@ -1,9 +1,9 @@
 Our project is organized using various services to facilitate database utility.
 The services are as follows:
 
-- userService
-- postsService
-- friendsService
+-   userService
+-   postsService
+-   friendsService
 
 ## userService
 
@@ -23,18 +23,21 @@ Run `make run` to start interacting with the database. Run `make clean` to resta
 
 Interact with the program using the terminal. The program will prompt you for input.
 
+For more information check out the _management_ section of `main.py`
+
 ### Basic Commands:
 
 `1` will create a random user_id
 
 `2` create a post for that user
 
-`3` add a friend a user
+`3` add a friendship for a user
 
 ### Interesting Queries:
 
-For more information check out the _management_ section of `main.py`
-``
+`4` view posts from friends of friends
+
+`5` unfollow all your current friends because they are annoying
 
 # Database
 
