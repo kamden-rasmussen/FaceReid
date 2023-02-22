@@ -17,10 +17,10 @@ class PostsService:
             'SELECT * FROM posts WHERE user_id = ?', (user_id,)
         ).fetchone()
 
-    def add_post(self, body, user_id):
+    def add_post(self, user_id, body):
         self.db.execute(
-            'INSERT INTO posts (body, user_id) VALUES (?, ?)',
-            (body, user_id)
+            'INSERT INTO posts (user_id, body) VALUES (?, ?)',
+            (user_id, body)
         )
         self.db.commit()
     
