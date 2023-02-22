@@ -65,3 +65,11 @@ class FriendsService(object):
             friendsOfFriends.append(friend[0])
 
         return friendsOfFriends
+
+    def unfollow_all_friends(self, user_id):
+        self.db.execute(
+            'UPDATE friends SET following = 0 WHERE user_id = ?',
+            (user_id,)
+        )
+        self.db.commit()
+        return self.get_friends(user_id)
