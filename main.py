@@ -67,7 +67,7 @@ def main():
             
             # -------------------- POSTS --------------------
             case "get all posts":
-                posts = postsService.get_all_posts()
+                posts = postsService.INTERNAL_get_all_posts()
                 for post in posts:
                     print(post)
 

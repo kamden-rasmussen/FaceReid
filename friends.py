@@ -10,12 +10,22 @@ class FriendsService(object):
             friends.append(friend)
         return friends
 
-    def add_friend(self, user_id, friend_id):
-        self.db.execute(
-            'INSERT INTO friends (user_id, friend_id) VALUES (?, ?)',
-            (user_id, friend_id)
+    def add_mutual_friendship(self, user_id, friend_id):
+        self.db.execute('''
+        INSERT INTO friends (user_id, friend_id) 
+        select ?, ?
+        where not exists 
+            (select 1 
+            from friends 
+            where user_id = ? 
+            and friend_id = ?); 
+        ''',(user_id, friend_id, user_id, friend_id)
         )
         self.db.commit()
+
+    def add_friend(self, user_id, friend_id):
+        self.add_mutual_friendship(user_id, friend_id)
+        self.add_mutual_friendship(friend_id, user_id)
 
     def unfollow_friend(self, user_id, friend_id):
         self.db.execute(
